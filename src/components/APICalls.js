@@ -22,10 +22,12 @@ export const loginAPI = async ({ username, password }) => {
     );
 
     if (response.status === 200) {
-      return response;
+      console.log(response);
+      return response.data;
     }
   } catch (err) {
-    console.log(`Failed to login: ${err}`);
+    console.log(err.response.status);
+    return err.response.status;
   }
 };
 

@@ -11,7 +11,6 @@ import About from "./pages/About";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import FourOhFour from "./pages/FourOhFour";
-import Nav from "./components/Nav";
 
 const MainLayout = () => (
   <AuthProvider>

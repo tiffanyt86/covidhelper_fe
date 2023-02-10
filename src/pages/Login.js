@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loginAPI } from "../components/APICalls";
-import { useAuth, setItemInLocalStorage } from "../hooks/useAuth";
-import { mockUser } from "./data";
+import { useAuth } from "../hooks/useAuth";
+// import { mockUser } from "./data";
+
+import "./login.css";
 
 const kDefaultFormState = {
   username: "",
@@ -12,6 +14,7 @@ const kDefaultFormState = {
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(kDefaultFormState);
+  const [message, setMessage] = useState(null);
 
   const { login } = useAuth();
 
@@ -20,6 +23,7 @@ const Login = () => {
     const fieldName = event.target.name;
     const newFormData = { ...formData, [fieldName]: fieldValue };
 
+    setMessage(null);
     setFormData(newFormData);
   };
 
@@ -27,27 +31,17 @@ const Login = () => {
     event.preventDefault();
     const response = await loginAPI(formData);
 
-    if (response.data["error"] === "Error logging in...") {
-      navigate("/404"); // not navigating here
+    if (response === 400) {
+      setMessage("Invalid credentials, try again");
     } else {
       login({
         username: formData.username,
         password: formData.password,
-        token: response.data,
+        token: response,
       });
+      setFormData(kDefaultFormState);
+      navigate("/home");
     }
-
-    // if (response.status === 200) {
-    //   login({
-    //     username: formData.username,
-    //     password: formData.password,
-    //     token: response.data,
-    //   });
-    //   console.log(response.data["error"]);
-    // }
-
-    setFormData(kDefaultFormState);
-    navigate("/home");
   };
 
   return (
@@ -93,6 +87,7 @@ const Login = () => {
               <NavLink to="/register">sign-up!</NavLink>
             </span>
           </div>
+          <div className="col-sm-10 red">{message}</div>
         </div>
       </form>
     </div>
