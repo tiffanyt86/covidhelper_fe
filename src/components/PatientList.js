@@ -12,12 +12,12 @@ const PatientList = (props) => {
         dob={patient.dob}
         comorbidities={patient.comorbidities}
         allergies={patient.allergies}
+        displayPatientDetail={props.displayPatientDetail}
       />
     ));
   };
 
   return (
-    // <div className="list-group">{getVaccinesArray(props.vaccineData)}</div>
     <div className="list-group">{getPatientsArray(props.patientData)}</div>
   );
 };

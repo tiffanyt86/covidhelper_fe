@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import PatientList from "../components/PatientList";
 import PatientDetail from "../components/PatientDetail";
 import NewPatientForm from "../components/NewPatientForm";
-import { getAllPatientsAPI } from "../components/APICalls";
+import { getAllPatientsAPI, getPatientDetailAPI } from "../components/APICalls";
 
 const PatientsMain = () => {
   const [patientData, setPatientData] = useState([]);
   const [patientDetail, setPatientDetail] = useState(null);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const getAllPatients = async () => {
     const data = await getAllPatientsAPI();
@@ -15,24 +16,30 @@ const PatientsMain = () => {
 
   useEffect(() => {
     getAllPatients();
-  }, []);
+    setIsSubmit(false);
+  }, [isSubmit]);
+
+  const displayPatientDetail = async (id) => {
+    const data = await getPatientDetailAPI(id);
+    setPatientDetail(data);
+  };
 
   return (
     <div className="container align-content-space-around">
-      Patients Page
       <div className="row">
         <div className="col">
           <h3>My Patients</h3>
           <PatientList
             patientData={patientData}
-            // getAllPatients={getAllPatients}
+            displayPatientDetail={displayPatientDetail}
           />
         </div>
-
-        <PatientDetail />
+        <div className="col">
+          {patientDetail && <PatientDetail patientDetail={patientDetail} />}
+        </div>
       </div>
       <div className="row">
-        <NewPatientForm />
+        <NewPatientForm setIsSubmit={setIsSubmit} />
       </div>
     </div>
   );

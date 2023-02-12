@@ -1,6 +1,5 @@
 import { useMemo, useState, useEffect, createContext, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { mockUser } from "../pages/data";
 
 export const setItemInLocalStorage = (keyName, value) => {
   window.localStorage.setItem(keyName, JSON.stringify(value));

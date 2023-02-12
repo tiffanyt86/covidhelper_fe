@@ -2,12 +2,6 @@ import axios from "axios";
 import { getItemFromLocalStorage } from "../hooks/useAuth";
 
 const kBaseUrl = process.env.REACT_APP_BACKEND_URL;
-const token = getItemFromLocalStorage("user");
-
-const convertTaskApi = (task) => {
-  const { id, is_complete: isComplete, title, description } = task;
-  return { id, isComplete, title, description };
-};
 
 export const loginAPI = async ({ username, password }) => {
   const request_body = JSON.stringify({
@@ -121,7 +115,7 @@ export const addNationalVaccine = async ({
       return response;
     }
   } catch (err) {
-    console.log(`Registration error: ${err}`);
+    console.log(`Error adding new vaccine: ${err}`);
   }
 };
 
@@ -144,7 +138,6 @@ export const getVaccineDetailAPI = async (id) => {
 
     if (response.status === 200) {
       console.log("got ONE vaccine");
-      // console.log(response.data);
       return response.data;
     }
   } catch (err) {
@@ -153,11 +146,12 @@ export const getVaccineDetailAPI = async (id) => {
 };
 
 export const getAllPatientsAPI = async () => {
+  const user = getItemFromLocalStorage("user");
   const config = {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Token ${token.token}`,
+      Authorization: `Token ${user.token}`,
     },
   };
   try {
@@ -165,9 +159,72 @@ export const getAllPatientsAPI = async () => {
 
     if (response.status === 200) {
       console.log("got all vaccines");
+      console.log(user.token);
       return response.data;
     }
   } catch (err) {
     console.log(`failed getting all patients: ${err}`);
+  }
+};
+
+export const getPatientDetailAPI = async (id) => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${kBaseUrl}/patients/${id}`, config);
+
+    if (response.status === 200) {
+      console.log("got ONE patient");
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting ONE patient: ${err}`);
+  }
+};
+
+export const addNewPatientAPI = async ({
+  first_name,
+  last_name,
+  dob,
+  comorbidities,
+  allergies,
+  provider,
+}) => {
+  const request_body = JSON.stringify({
+    first_name,
+    last_name,
+    dob,
+    comorbidities,
+    allergies,
+    provider,
+  });
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      `${kBaseUrl}/my_patients/`,
+      request_body,
+      config
+    );
+    console.log(response);
+
+    if (response.status === 201) {
+      return response;
+    }
+  } catch (err) {
+    console.log(`Error adding new patient: ${err}`);
   }
 };

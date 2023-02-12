@@ -20,17 +20,15 @@ const VaccinesMain = () => {
   const displayVaccineDetail = async (id) => {
     const data = await getVaccineDetailAPI(id);
     setVaccineDetail(data);
-    console.log(data);
   };
 
   return (
     <div className="container align-content-space-around">
       <div className="row">
         <div className="col">
-          <h3>Nationally Available COVID-19 Vaccines</h3>
+          <h3>Available COVID-19 Vaccines</h3>
           <VaccineList
             vaccineData={vaccineData}
-            // getAllVaccines={getAllVaccines}
             displayVaccineDetail={displayVaccineDetail}
           />
         </div>
