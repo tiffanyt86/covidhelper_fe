@@ -2,6 +2,11 @@ import axios from "axios";
 
 const kBaseUrl = process.env.REACT_APP_BACKEND_URL;
 
+const convertTaskApi = (task) => {
+  const { id, is_complete: isComplete, title, description } = task;
+  return { id, isComplete, title, description };
+};
+
 export const loginAPI = async ({ username, password }) => {
   const request_body = JSON.stringify({
     username,
@@ -115,5 +120,32 @@ export const addNationalVaccine = async ({
     }
   } catch (err) {
     console.log(`Registration error: ${err}`);
+  }
+};
+
+export const getAllVaccinesAPI = async () => {
+  try {
+    const response = await axios.get(`${kBaseUrl}/vaccines/`);
+
+    if (response.status === 200) {
+      console.log("got all vaccines");
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting all vaccines: ${err}`);
+  }
+};
+
+export const getVaccineDetailAPI = async (id) => {
+  try {
+    const response = await axios.get(`${kBaseUrl}/vaccines/${id}`);
+
+    if (response.status === 200) {
+      console.log("got ONE vaccine");
+      // console.log(response.data);
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting ONE vaccine: ${err}`);
   }
 };

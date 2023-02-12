@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VaccinesMain from "./pages/VaccinesMain";
+import PatientsMain from "./pages/PatientsMain";
 import About from "./pages/About";
 import Logout from "./pages/Logout";
 import Register from "./pages/Register";
@@ -35,6 +36,10 @@ export const routes = [
       {
         element: <VaccinesMain />,
         path: "/vaccines",
+      },
+      {
+        element: <PatientsMain />,
+        path: "/patients",
       },
       {
         element: <About />,

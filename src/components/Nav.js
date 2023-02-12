@@ -54,7 +54,7 @@ const Nav = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarText">
         <div className="navbar-nav container justify-content-start">
-          <NavLink className="nav-item nav-link active" to="/home">
+          <NavLink className="nav-item nav-link" to="/home">
             Home <span class="sr-only">(current)</span>
           </NavLink>
           <NavLink className="nav-item nav-link" to="/vaccines">
@@ -62,6 +62,9 @@ const Nav = () => {
           </NavLink>
           <NavLink className="nav-item nav-link" to="/about">
             About
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/patients">
+            Patients
           </NavLink>
           {user.username ? authLinks : guestLinks}
         </div>
