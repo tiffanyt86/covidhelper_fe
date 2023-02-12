@@ -37,7 +37,8 @@ const Login = () => {
       login({
         username: formData.username,
         password: formData.password,
-        token: response,
+        token: response[0],
+        id: response[1],
       });
       setFormData(kDefaultFormState);
       navigate("/home");

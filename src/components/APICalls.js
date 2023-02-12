@@ -1,6 +1,8 @@
 import axios from "axios";
+import { getItemFromLocalStorage } from "../hooks/useAuth";
 
 const kBaseUrl = process.env.REACT_APP_BACKEND_URL;
+const token = getItemFromLocalStorage("user");
 
 const convertTaskApi = (task) => {
   const { id, is_complete: isComplete, title, description } = task;
@@ -147,5 +149,25 @@ export const getVaccineDetailAPI = async (id) => {
     }
   } catch (err) {
     console.log(`failed getting ONE vaccine: ${err}`);
+  }
+};
+
+export const getAllPatientsAPI = async () => {
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${token.token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${kBaseUrl}/my_patients/`, config);
+
+    if (response.status === 200) {
+      console.log("got all vaccines");
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting all patients: ${err}`);
   }
 };

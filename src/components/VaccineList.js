@@ -17,7 +17,6 @@ const VaccineList = (props) => {
         bud={vaccine.bud}
         ndc={vaccine.ndc}
         link={vaccine.link}
-        getVaccineData={props.getVaccineData}
         displayVaccineDetail={props.displayVaccineDetail}
       />
     ));

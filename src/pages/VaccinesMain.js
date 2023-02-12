@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NationalVaccineForm from "../components/NationalVaccineForm";
+import NationalVaccineForm from "../components/NewVaccineForm";
 import { getAllVaccinesAPI, getVaccineDetailAPI } from "../components/APICalls";
 import VaccineList from "../components/VaccineList";
 import VaccineDetail from "../components/VaccineDetail";
@@ -30,7 +30,7 @@ const VaccinesMain = () => {
           <h3>Nationally Available COVID-19 Vaccines</h3>
           <VaccineList
             vaccineData={vaccineData}
-            getAllVaccines={getAllVaccines}
+            // getAllVaccines={getAllVaccines}
             displayVaccineDetail={displayVaccineDetail}
           />
         </div>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addNationalVaccine } from "../components/APICalls";
+import { addNationalVaccine } from "./APICalls";
 
-import "./nationalVaccineForm.css";
+import "./newVaccineForm.css";
 
 const kDefaultFormState = {
   name: "",
@@ -19,7 +19,7 @@ const kDefaultFormState = {
   link: "",
 };
 
-const NationalVaccineForm = () => {
+const NewVaccineForm = () => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
@@ -247,4 +247,4 @@ const NationalVaccineForm = () => {
   );
 };
 
-export default NationalVaccineForm;
+export default NewVaccineForm;

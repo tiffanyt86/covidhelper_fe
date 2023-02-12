@@ -5,7 +5,6 @@ import "./nav.css";
 
 const Nav = () => {
   const user = getItemFromLocalStorage("user");
-  // const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogout = async (event) => {
