@@ -228,3 +228,46 @@ export const addNewPatientAPI = async ({
     console.log(`Error adding new patient: ${err}`);
   }
 };
+
+export const getVaccineRecordAPI = async () => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${kBaseUrl}/records/`, config);
+
+    if (response.status === 200) {
+      console.log("got all records");
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting all patients: ${err}`);
+  }
+};
+
+export const getPatientVaccineDetailAPI = async (id) => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+  try {
+    const response = await axios.get(`${kBaseUrl}/vaccines/${id}`, config);
+
+    if (response.status === 200) {
+      console.log("got ONE vaccine INFO");
+      // console.log(response);
+      return response.data;
+    }
+  } catch (err) {
+    console.log(`failed getting ONE vaccine INFO: ${err}`);
+  }
+};

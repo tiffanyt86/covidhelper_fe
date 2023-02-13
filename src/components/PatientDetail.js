@@ -1,4 +1,5 @@
 import React from "react";
+import PatientRecord from "./PatientRecord";
 
 const PatientDetail = (props) => {
   return (
@@ -13,6 +14,8 @@ const PatientDetail = (props) => {
           </div>
         );
       })}
+      <p></p>
+      <PatientRecord patientDetail={props.patientDetail} />
     </div>
   );
 };
