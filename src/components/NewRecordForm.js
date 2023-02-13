@@ -14,6 +14,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const kDefaultFormState = {
   date_administered: "",
+  patient_id: "",
+  vaccine_id: "",
 };
 
 const convertDate = (str) => {
@@ -43,28 +45,27 @@ const NewRecordForm = (props) => {
 
   const getVaccineArray = (data) => {
     return data.map((vaccine) => (
-      <option>
-        <VaccineDropDown
-          key={vaccine.id}
-          id={vaccine.id}
-          name={vaccine.name}
-          age={vaccine.age}
-          cap_color={vaccine.cap_color}
-          dose={vaccine.dose}
-          dilution={vaccine.dilution}
-          storage={vaccine.storage}
-          thaw={vaccine.thaw}
-          bud={vaccine.bud}
-          ndc={vaccine.ndc}
-          link={vaccine.link}
-        />
-      </option>
+      <VaccineDropDown
+        key={vaccine.id}
+        id={vaccine.id}
+        name={vaccine.name}
+        age={vaccine.age}
+        cap_color={vaccine.cap_color}
+        dose={vaccine.dose}
+        dilution={vaccine.dilution}
+        storage={vaccine.storage}
+        thaw={vaccine.thaw}
+        bud={vaccine.bud}
+        ndc={vaccine.ndc}
+        link={vaccine.link}
+      />
     ));
   };
 
   const getPatientsArray = (data) => {
-    return data.map((patient) => (
-      <option>
+    return data.map(
+      (patient) => (
+        // <option value={patient.id}>
         <PatientDropDown
           key={patient.id}
           id={patient.id}
@@ -73,19 +74,34 @@ const NewRecordForm = (props) => {
           dob={patient.dob}
           comorbidities={patient.comorbidities}
           allergies={patient.allergies}
+          formData={formData}
         />
-      </option>
-    ));
+      )
+
+      // </option>
+    );
   };
 
-  const handleChange = (event) => {
+  const handlePatientChange = (event) => {
     const newFormData = {
+      ...formData,
+      patient_id: event.target.value,
       date_administered: convertDate(startDate),
-      patient_id: props.patient.id,
     };
-
     setFormData(newFormData);
     setMessage(null);
+    console.log(newFormData);
+  };
+
+  const handleVaccineChange = (event) => {
+    const newFormData = {
+      ...formData,
+      vaccine_id: event.target.value,
+      date_administered: convertDate(startDate),
+    };
+    setFormData(newFormData);
+    setMessage(null);
+    console.log(newFormData);
   };
 
   const handleAddRecord = async (event) => {
@@ -111,13 +127,19 @@ const NewRecordForm = (props) => {
     <div className="col">
       <h3>Add New Vaccine Record</h3>
       <p></p>
-      <form onChange={handleChange} onSubmit={handleAddRecord}>
+      {/* <form onChange={handleChange} onSubmit={handleAddRecord}> */}
+      <form onSubmit={handleAddRecord}>
         <div className="form-group row">
           <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">
             Vaccine Name
           </label>
-          <select class="col-sm-3" id="inlineFormCustomSelect">
-            <option selected>Select Vaccine...</option>
+          <select
+            class="col-sm-3"
+            name="vaccine_id"
+            id="vaccine_id"
+            onChange={handleVaccineChange}
+          >
+            <option>Select Vaccine...</option>
             {getVaccineArray(vaccineData)}
           </select>
         </div>
@@ -125,8 +147,13 @@ const NewRecordForm = (props) => {
           <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">
             Patient Name
           </label>
-          <select class="col-sm-3" id="inlineFormCustomSelect">
-            <option selected>Select Patient...</option>
+          <select
+            class="col-sm-3"
+            name="patient_id"
+            id="patient_id"
+            onChange={handlePatientChange}
+          >
+            <option>Select Patient...</option>
             {getPatientsArray(patientData)}
           </select>
         </div>
@@ -138,7 +165,6 @@ const NewRecordForm = (props) => {
             <ReactDatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
-              // onChange={handleChange = (date)}
               placeholderText="DOB"
               showMonthDropdown
               showYearDropdown
