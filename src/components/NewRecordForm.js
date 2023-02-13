@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import ReactDatePicker from "react-datepicker";
 import VaccineDropDown from "./VaccineDropDown";
-
-import { addNewRecordAPI, getAllVaccinesAPI } from "./APICalls";
+import PatientDropDown from "./PatientDropDown";
+import {
+  addNewRecordAPI,
+  getAllPatientsAPI,
+  getAllVaccinesAPI,
+} from "./APICalls";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,10 +29,16 @@ const NewRecordForm = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
   const [vaccineData, setVaccineData] = useState([]);
+  const [patientData, setPatientData] = useState([]);
 
   const getAllVaccines = async () => {
     const data = await getAllVaccinesAPI();
     setVaccineData(data);
+  };
+
+  const getAllPatients = async () => {
+    const data = await getAllPatientsAPI();
+    setPatientData(data);
   };
 
   const getVaccineArray = (data) => {
@@ -47,6 +57,22 @@ const NewRecordForm = (props) => {
           bud={vaccine.bud}
           ndc={vaccine.ndc}
           link={vaccine.link}
+        />
+      </option>
+    ));
+  };
+
+  const getPatientsArray = (data) => {
+    return data.map((patient) => (
+      <option>
+        <PatientDropDown
+          key={patient.id}
+          id={patient.id}
+          first_name={patient.first_name}
+          last_name={patient.last_name}
+          dob={patient.dob}
+          comorbidities={patient.comorbidities}
+          allergies={patient.allergies}
         />
       </option>
     ));
@@ -78,6 +104,7 @@ const NewRecordForm = (props) => {
 
   useEffect(() => {
     getAllVaccines();
+    getAllPatients();
   }, []);
 
   return (
@@ -90,8 +117,17 @@ const NewRecordForm = (props) => {
             Vaccine Name
           </label>
           <select class="col-sm-3" id="inlineFormCustomSelect">
-            <option selected>Choose...</option>
+            <option selected>Select Vaccine...</option>
             {getVaccineArray(vaccineData)}
+          </select>
+        </div>
+        <div className="form-group row">
+          <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">
+            Patient Name
+          </label>
+          <select class="col-sm-3" id="inlineFormCustomSelect">
+            <option selected>Select Patient...</option>
+            {getPatientsArray(patientData)}
           </select>
         </div>
         <div className="form-group row">
@@ -111,129 +147,21 @@ const NewRecordForm = (props) => {
             />
           </div>
         </div>
+        <div className="form-group row">
+          <div className="col-sm-10 theme-color">
+            <span>
+              <input
+                type="submit"
+                className="btn btn-primary"
+                value="Add New Vaccine Record"
+              ></input>
+            </span>
+            {message && <span className="pl-3">{message}</span>}
+          </div>
+        </div>
       </form>
     </div>
   );
 };
 
 export default NewRecordForm;
-
-//   return (
-//     <div className="col">
-//       <h3>Add New Patient</h3>
-//       <p></p>
-//       <form onSubmit={handleAddPatient}>
-//         <div className="form-group row">
-//           <label className="col-sm-2 col-form-label">First Name</label>
-//           <div className="col-sm-10">
-//             <input
-//               type="text"
-//               className="form-control"
-//               id="first_name"
-//               name="first_name"
-//               value={formData.first_name}
-//               onChange={handleChange}
-//             ></input>
-//           </div>
-//         </div>
-//         <div className="form-group row">
-//           <label className="col-sm-2 col-form-label">Last Name</label>
-//           <div className="col-sm-10">
-//             <input
-//               type="text"
-//               className="form-control"
-//               id="last_name"
-//               name="last_name"
-//               value={formData.last_name}
-//               onChange={handleChange}
-//             ></input>
-//           </div>
-//         </div>
-// <div className="form-group row">
-//   <label className="col-sm-2 col-form-label">Date of Birth</label>
-//   <div className="col-sm-3">
-//     <ReactDatePicker
-//       selected={startDate}
-//       onChange={(date) => setStartDate(date)}
-//       placeholderText="DOB"
-//       showMonthDropdown
-//       showYearDropdown
-//       dropdownMode="select"
-//       isClearable
-//     />
-//   </div>
-// </div>
-//         <div className="form-group row">
-//           <label className="col-sm-2 col-form-label">Comorbidities</label>
-//           <div className="col-sm-10">
-//             <div className="form-check form-check-inline">
-//               <input
-//                 className="form-check-input"
-//                 type="radio"
-//                 name="comorbidities"
-//                 id="comorbidities"
-//                 value="True"
-//                 checked={formData.comorbidities === "True"}
-//                 onChange={handleChange}
-//               ></input>
-//               <label className="form-check-label">True</label>
-//             </div>
-//             <div className="form-check form-check-inline">
-//               <input
-//                 className="form-check-input"
-//                 type="radio"
-//                 name="comorbidities"
-//                 id="comorbidities"
-//                 value="False"
-//                 checked={formData.comorbidities === "False"}
-//                 onChange={handleChange}
-//               ></input>
-//               <label className="form-check-label">False</label>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="form-group row">
-//           <label className="col-sm-2 col-form-label">Allergies</label>
-//           <div className="col-sm-10">
-//             <div className="form-check form-check-inline">
-//               <input
-//                 className="form-check-input"
-//                 type="radio"
-//                 name="allergies"
-//                 id="allergies"
-//                 value="True"
-//                 checked={formData.allergies === "True"}
-//                 onChange={handleChange}
-//               ></input>
-//               <label className="form-check-label">True</label>
-//             </div>
-//             <div className="form-check form-check-inline">
-//               <input
-//                 className="form-check-input"
-//                 type="radio"
-//                 name="allergies"
-//                 id="allergies"
-//                 value="False"
-//                 checked={formData.allergies === "False"}
-//                 onChange={handleChange}
-//               ></input>
-//               <label className="form-check-label">False</label>
-//             </div>
-//           </div>
-//         </div>
-//         <div className="form-group row">
-//           <div className="col-sm-10 theme-color">
-//             <span>
-//               <input
-//                 type="submit"
-//                 className="btn btn-primary"
-//                 value="Add New Patient"
-//               ></input>
-//             </span>
-//             {message && <span className="pl-3">{message}</span>}
-//           </div>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
