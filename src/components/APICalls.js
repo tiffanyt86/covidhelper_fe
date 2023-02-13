@@ -271,3 +271,38 @@ export const getPatientVaccineDetailAPI = async (id) => {
     console.log(`failed getting ONE vaccine INFO: ${err}`);
   }
 };
+
+export const addNewRecordAPI = async ({
+  date_administered,
+  patient_id,
+  vaccine_id,
+}) => {
+  const request_body = JSON.stringify({
+    date_administered,
+    patient_id,
+    vaccine_id,
+  });
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+
+  try {
+    const response = await axios.post(
+      `${kBaseUrl}/records/`,
+      request_body,
+      config
+    );
+    console.log(response);
+
+    if (response.status === 201) {
+      return response;
+    }
+  } catch (err) {
+    console.log(`Error adding new vaccine record: ${err}`);
+  }
+};

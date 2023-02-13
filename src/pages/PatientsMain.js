@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PatientList from "../components/PatientList";
 import PatientDetail from "../components/PatientDetail";
 import NewPatientForm from "../components/NewPatientForm";
+import NewRecordForm from "../components/NewRecordForm";
 import { getAllPatientsAPI, getPatientDetailAPI } from "../components/APICalls";
 
 const PatientsMain = () => {
@@ -39,7 +40,12 @@ const PatientsMain = () => {
         </div>
       </div>
       <div className="row">
-        <NewPatientForm setIsSubmit={setIsSubmit} />
+        <div className="col">
+          <NewPatientForm setIsSubmit={setIsSubmit} />
+        </div>
+      </div>
+      <div className="row">
+        <NewRecordForm setIsSubmit={setIsSubmit} patient={patientDetail} />
       </div>
     </div>
   );
