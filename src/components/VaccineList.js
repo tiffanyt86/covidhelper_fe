@@ -18,6 +18,7 @@ const VaccineList = (props) => {
         ndc={vaccine.ndc}
         link={vaccine.link}
         displayVaccineDetail={props.displayVaccineDetail}
+        getAllVaccines={props.getAllVaccines}
       />
     ));
   };

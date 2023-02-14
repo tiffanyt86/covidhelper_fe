@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getVaccineRecordAPI, getPatientVaccineDetailAPI } from "./APICalls";
 import VaccinationLogEntry from "./VaccinationLogEntry";
+import { deleteRecordAPI } from "./APICalls";
 
 const PatientRecord = (props) => {
   const [vaccineRecord, setVaccineRecord] = useState([]);
@@ -43,24 +44,27 @@ const PatientRecord = (props) => {
     };
 
     getPatientVaccineDetails(props.patientDetail.id);
-  }, [props.patientDetail]);
+  }, [props.patientDetail, vaccineRecord]);
 
   const getVaccinesArray = (records, vaccines) => {
     return records.map((record) => (
-      <VaccinationLogEntry
-        key={record.id}
-        id={record.id}
-        date_administered={record.date_administered}
-        vaccine_id={record.vaccine_id}
-        patient_id={record.patient_id}
-        vaccine={vaccines[record.vaccine_id]}
-      />
+      <div className="card bg-light mb-3 container">
+        <VaccinationLogEntry
+          key={record.id}
+          id={record.id}
+          date_administered={record.date_administered}
+          vaccine_id={record.vaccine_id}
+          patient_id={record.patient_id}
+          vaccine={vaccines[record.vaccine_id]}
+          patientDetail={props.patientDetail}
+          setVaccineRecord={setVaccineRecord}
+        />
+      </div>
     ));
   };
 
   return (
     <div>
-      <h3>Patient Vaccination Record</h3>
       {getVaccinesArray(vaccineRecord, vaccineDetail)}
       <p></p>
     </div>

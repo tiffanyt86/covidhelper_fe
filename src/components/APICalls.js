@@ -296,12 +296,73 @@ export const addNewRecordAPI = async ({
       request_body,
       config
     );
-    console.log(response);
-
     if (response.status === 201) {
       return response;
     }
   } catch (err) {
     console.log(`Error adding new vaccine record: ${err}`);
+  }
+};
+
+export const deleteVaccineAPI = async (id) => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+
+  try {
+    const response = await axios.delete(`${kBaseUrl}/vaccines/${id}/`, config);
+
+    if (response.status === 204) {
+      console.log("Vaccine has been deleted");
+    }
+  } catch (err) {
+    console.log(`Failed to delete vaccine: ${err}`);
+  }
+};
+
+export const deletePatientAPI = async (id) => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+
+  try {
+    const response = await axios.delete(`${kBaseUrl}/patients/${id}/`, config);
+
+    if (response.status === 204) {
+      console.log("Patient has been deleted");
+    }
+  } catch (err) {
+    console.log(`Failed to delete patient: ${err}`);
+  }
+};
+
+export const deleteRecordAPI = async (id) => {
+  const user = getItemFromLocalStorage("user");
+  const config = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Token ${user.token}`,
+    },
+  };
+
+  try {
+    const response = await axios.delete(`${kBaseUrl}/records/${id}/`, config);
+
+    if (response.status === 204) {
+      console.log("Record has been deleted");
+    }
+  } catch (err) {
+    console.log(`Failed to delete record: ${err}`);
   }
 };

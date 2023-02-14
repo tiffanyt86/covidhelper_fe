@@ -13,6 +13,7 @@ const PatientList = (props) => {
         comorbidities={patient.comorbidities}
         allergies={patient.allergies}
         displayPatientDetail={props.displayPatientDetail}
+        getAllPatients={props.getAllPatients}
       />
     ));
   };

@@ -33,10 +33,16 @@ const PatientsMain = () => {
           <PatientList
             patientData={patientData}
             displayPatientDetail={displayPatientDetail}
+            getAllPatients={getAllPatients}
           />
         </div>
         <div className="col">
-          {patientDetail && <PatientDetail patientDetail={patientDetail} />}
+          {patientDetail && (
+            <PatientDetail
+              patientDetail={patientDetail}
+              displayPatientDetail={displayPatientDetail}
+            />
+          )}
         </div>
       </div>
       <div className="row">

@@ -15,7 +15,10 @@ const PatientDetail = (props) => {
         );
       })}
       <p></p>
-      <PatientRecord patientDetail={props.patientDetail} />
+      <PatientRecord
+        patientDetail={props.patientDetail}
+        displayPatientDetail={props.displayPatientDetail}
+      />
     </div>
   );
 };

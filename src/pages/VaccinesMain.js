@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import NationalVaccineForm from "../components/NewVaccineForm";
-import { getAllVaccinesAPI, getVaccineDetailAPI } from "../components/APICalls";
+import {
+  getAllVaccinesAPI,
+  getVaccineDetailAPI,
+  deleteVaccineAPI,
+} from "../components/APICalls";
 import VaccineList from "../components/VaccineList";
 import VaccineDetail from "../components/VaccineDetail";
 
@@ -30,6 +34,7 @@ const VaccinesMain = () => {
           <VaccineList
             vaccineData={vaccineData}
             displayVaccineDetail={displayVaccineDetail}
+            getAllVaccines={getAllVaccines}
           />
         </div>
         <div className="col">
