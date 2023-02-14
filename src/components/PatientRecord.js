@@ -44,7 +44,7 @@ const PatientRecord = (props) => {
     };
 
     getPatientVaccineDetails(props.patientDetail.id);
-  }, [props.patientDetail, vaccineRecord]);
+  }, [props.patientDetail]);
 
   const getVaccinesArray = (records, vaccines) => {
     return records.map((record) => (

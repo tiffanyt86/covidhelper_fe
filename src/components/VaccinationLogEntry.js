@@ -1,15 +1,9 @@
 import React from "react";
-import { deleteRecordAPI, getVaccineRecordAPI } from "./APICalls";
+import { deleteRecordAPI } from "./APICalls";
 
 const VaccinationLogEntry = (props) => {
   const handleDeleteRecord = async () => {
     await deleteRecordAPI(props.id);
-    getPatientRecords(props.patient_id);
-  };
-
-  const getPatientRecords = async (id) => {
-    const data = await getVaccineRecordAPI(id);
-    props.setVaccineRecord(data);
   };
 
   return (
@@ -24,3 +18,13 @@ const VaccinationLogEntry = (props) => {
 };
 
 export default VaccinationLogEntry;
+
+// {
+//   /* <div className="card bg-light mb-3">
+//   <div className="card-header">{props.patientDetails.first_name}'s Vaccine Record</div>
+//   <div className="card-body">
+//     <h5 className="card-title">{props.vaccine.name}</h5>
+//     <p className="card-text">Date Administered: {props.date_administered}</p>
+//   </div>
+// </div> */
+// }
