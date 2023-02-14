@@ -99,8 +99,6 @@ const NewRecordForm = (props) => {
 
   const handleAddRecord = async (event) => {
     event.preventDefault();
-    props.setIsSubmit(true);
-
     const response = await addNewRecordAPI(formData);
 
     if (response.status === 201) {
@@ -108,7 +106,7 @@ const NewRecordForm = (props) => {
     } else {
       setMessage("Error adding vaccine record");
     }
-    setFormData(kDefaultFormState);
+    props.displayPatientDetail(patientData.id);
   };
 
   useEffect(() => {

@@ -51,7 +51,11 @@ const PatientsMain = () => {
         </div>
       </div>
       <div className="row">
-        <NewRecordForm setIsSubmit={setIsSubmit} patient={patientDetail} />
+        <NewRecordForm
+          setIsSubmit={setIsSubmit}
+          patient={patientDetail}
+          displayPatientDetail={displayPatientDetail}
+        />
       </div>
     </div>
   );
