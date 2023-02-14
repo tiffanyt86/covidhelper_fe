@@ -259,6 +259,7 @@ export const getPatientVaccineDetailAPI = async (id) => {
       Authorization: `Token ${user.token}`,
     },
   };
+  // this is where the code is breaking when clicking on "Singh, Mom" that has no vaccines administered, passes in []
   try {
     const response = await axios.get(`${kBaseUrl}/vaccines?ids=${id}`, config);
 
@@ -268,6 +269,7 @@ export const getPatientVaccineDetailAPI = async (id) => {
     }
   } catch (err) {
     console.log(`failed getting ONE vaccine INFO: ${err}`);
+    return []; // added this to prevent error in the call
   }
 };
 

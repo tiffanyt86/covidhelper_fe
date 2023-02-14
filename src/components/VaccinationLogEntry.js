@@ -1,30 +1,26 @@
 import React from "react";
-import { deleteRecordAPI } from "./APICalls";
+import { deleteRecordAPI, getVaccineRecordAPI } from "./APICalls";
 
 const VaccinationLogEntry = (props) => {
   const handleDeleteRecord = async () => {
     await deleteRecordAPI(props.id);
+    props.displayPatientDetail(props.patient_id);
   };
 
   return (
     <div className="card-body">
-      <div className="card-title font-weight-bold">{props.vaccine.name}</div>
-      Date Administered: {props.date_administered}
-      <div className="card-text-sml"></div>
-      <button onClick={handleDeleteRecord}>Remove</button>
-      {props.patient_id}
+      <h6>{props.vaccine.name}</h6>
+      <text className="card-text-sml-pr-3 mr-2">
+        Date Administered: {props.date_administered}
+      </text>
+      <button
+        onClick={handleDeleteRecord}
+        className="btn btn-outline-danger btn-sm"
+      >
+        Remove
+      </button>
     </div>
   );
 };
 
 export default VaccinationLogEntry;
-
-// {
-//   /* <div className="card bg-light mb-3">
-//   <div className="card-header">{props.patientDetails.first_name}'s Vaccine Record</div>
-//   <div className="card-body">
-//     <h5 className="card-title">{props.vaccine.name}</h5>
-//     <p className="card-text">Date Administered: {props.date_administered}</p>
-//   </div>
-// </div> */
-// }

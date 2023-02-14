@@ -21,7 +21,7 @@ const Patient = (props) => {
         </div>
         <div className="col small">
           <button
-            className="btn btn-outline-danger btn-sm"
+            className="btn btn-secondary btn-sm"
             onClick={handleDeletePatient}
           >
             X

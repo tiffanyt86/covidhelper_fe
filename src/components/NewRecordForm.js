@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 import ReactDatePicker from "react-datepicker";
 import VaccineDropDown from "./VaccineDropDown";
@@ -29,7 +28,6 @@ const NewRecordForm = (props) => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [message, setMessage] = useState(null);
   const [startDate, setStartDate] = useState(new Date());
-  const navigate = useNavigate();
   const [vaccineData, setVaccineData] = useState([]);
   const [patientData, setPatientData] = useState([]);
 
@@ -106,9 +104,9 @@ const NewRecordForm = (props) => {
     const response = await addNewRecordAPI(formData);
 
     if (response.status === 201) {
-      setMessage("New Vaccine Record Successfully Added!");
+      setMessage("Added new vaccine record!");
     } else {
-      navigate("/404");
+      setMessage("Error adding vaccine record");
     }
     setFormData(kDefaultFormState);
   };
@@ -132,6 +130,7 @@ const NewRecordForm = (props) => {
             Vaccine Name
           </label>
           <select
+            value={vaccineData.vaccine_id}
             class="col-sm-3"
             name="vaccine_id"
             id="vaccine_id"
