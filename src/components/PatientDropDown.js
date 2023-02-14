@@ -5,9 +5,6 @@ const PatientDropDown = (props) => {
     <option value={props.id}>
       {props.last_name}, {props.first_name}
     </option>
-    // <>
-    //   [value: '{props.id}'', label: '{props.first_name}']
-    // </>
   );
 };
 

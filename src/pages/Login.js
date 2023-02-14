@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loginAPI } from "../components/APICalls";
 import { useAuth } from "../hooks/useAuth";
-// import { mockUser } from "./data";
 
 import "./login.css";
 

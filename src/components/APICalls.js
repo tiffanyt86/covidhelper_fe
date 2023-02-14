@@ -264,7 +264,6 @@ export const getPatientVaccineDetailAPI = async (id) => {
 
     if (response.status === 200) {
       console.log("got ONE vaccine INFO");
-      // console.log(response);
       return response.data;
     }
   } catch (err) {

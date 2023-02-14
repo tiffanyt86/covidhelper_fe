@@ -54,7 +54,7 @@ const Nav = () => {
       <div className="collapse navbar-collapse" id="navbarText">
         <div className="navbar-nav container justify-content-start">
           <NavLink className="nav-item nav-link" to="/home">
-            Home <span class="sr-only">(current)</span>
+            Home <span className="sr-only">(current)</span>
           </NavLink>
           <NavLink className="nav-item nav-link" to="/vaccines">
             Vaccines

@@ -63,23 +63,18 @@ const NewRecordForm = (props) => {
   };
 
   const getPatientsArray = (data) => {
-    return data.map(
-      (patient) => (
-        // <option value={patient.id}>
-        <PatientDropDown
-          key={patient.id}
-          id={patient.id}
-          first_name={patient.first_name}
-          last_name={patient.last_name}
-          dob={patient.dob}
-          comorbidities={patient.comorbidities}
-          allergies={patient.allergies}
-          formData={formData}
-        />
-      )
-
-      // </option>
-    );
+    return data.map((patient) => (
+      <PatientDropDown
+        key={patient.id}
+        id={patient.id}
+        first_name={patient.first_name}
+        last_name={patient.last_name}
+        dob={patient.dob}
+        comorbidities={patient.comorbidities}
+        allergies={patient.allergies}
+        formData={formData}
+      />
+    ));
   };
 
   const handlePatientChange = (event) => {
@@ -130,7 +125,10 @@ const NewRecordForm = (props) => {
       {/* <form onChange={handleChange} onSubmit={handleAddRecord}> */}
       <form onSubmit={handleAddRecord}>
         <div className="form-group row">
-          <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">
+          <label
+            className="col-sm-2 col-form-label"
+            for="inlineFormCustomSelect"
+          >
             Vaccine Name
           </label>
           <select

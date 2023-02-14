@@ -1,62 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { getVaccineRecordAPI, getPatientVaccineDetailAPI } from "./APICalls";
-import Thing from "./Thing";
+import VaccinationLogEntry from "./VaccinationLogEntry";
 
 const PatientRecord = (props) => {
   const [vaccineRecord, setVaccineRecord] = useState([]);
   const [vaccineDetail, setVaccineDetail] = useState([]);
 
-  // DO NOT DELETE!
-  // const getPatientRecords = async (id) => {
-  //   const data = await getVaccineRecordAPI(props.patientDetail.id);
-  //   setVaccineRecord(data);
-
-  //   const newdata = data.reduce(function (filtered, option) {
-  //     if (option.vaccine_id) {
-  //       return filtered.concat([option.vaccine_id]);
-  //     }
-  //     return filtered;
-  //   }, []);
-
-  //   await getVaccineDetail(newdata);
-  // };
-
-  // const getVaccineDetail = async (id) => {
-  //   // return await getPatientVaccineDetailAPI(id);
-
-  //   const data = await getPatientVaccineDetailAPI(id); // DO NOT DELETE
-
-  //   const vaccineDetailsMap = {};
-  //   for (let i = 0; i < data.length; i++) {
-  //     const entry = data[i];
-  //     vaccineDetailsMap[entry.id] = entry;
-  //   }
-  //   await setVaccineDetail(vaccineDetailsMap);
-  // };
-
-  // const vaccineDetailsMap = (data) => {
-  //   for (let i = 0; i < data.length; i++) {
-  //     const entry = data[i]}
-  //   return vaccineDetailsMap[entry.id] = entry;
-  // }
-
-  // };
-  //   for (let i = 0; i < data.length; i++) {
-  //     const entry = data[i];
-  //     vaccineDetailsMap[entry.id] = entry;
-  //   }
-  //   await setVaccineDetail(vaccineDetailsMap);
-  //   console.log(vaccineDetail);
-  // };
-
   useEffect(() => {
     const getVaccineDetail = async (id) => {
-      // return await getPatientVaccineDetailAPI(id);
-
-      const data = await getPatientVaccineDetailAPI(id); // DO NOT DELETE
+      const data = await getPatientVaccineDetailAPI(id);
 
       const vaccineDetailsMap = {};
-      for (let i = 0; i < data.length; i++) {
+      for (let i = 0; data !== null && i < data.length; i++) {
         const entry = data[i];
         vaccineDetailsMap[entry.id] = entry;
       }
@@ -90,17 +45,9 @@ const PatientRecord = (props) => {
     getPatientVaccineDetails(props.patientDetail.id);
   }, [props.patientDetail]);
 
-  // console.log("printing vaccine records");
-  // console.log(vaccineRecord);
-  // console.log("end vaccine records");
-
-  // loop over the the vaccineRecord
-  // for each entry we use the vaccine_id to look up into the vaccineDetail
-  // now we have complete information about the administered date and the vaccine itself
-
   const getVaccinesArray = (records, vaccines) => {
     return records.map((record) => (
-      <Thing
+      <VaccinationLogEntry
         key={record.id}
         id={record.id}
         date_administered={record.date_administered}

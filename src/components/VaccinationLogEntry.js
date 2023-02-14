@@ -1,6 +1,6 @@
 import React from "react";
 
-const Thing = (props) => {
+const VaccinationLogEntry = (props) => {
   return (
     <div>
       <ul>Vaccine: {props.vaccine.name}</ul>
@@ -9,4 +9,4 @@ const Thing = (props) => {
   );
 };
 
-export default Thing;
+export default VaccinationLogEntry;
