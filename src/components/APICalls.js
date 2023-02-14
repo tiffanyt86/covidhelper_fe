@@ -229,7 +229,7 @@ export const addNewPatientAPI = async ({
   }
 };
 
-export const getVaccineRecordAPI = async () => {
+export const getVaccineRecordAPI = async (id) => {
   const user = getItemFromLocalStorage("user");
   const config = {
     headers: {
@@ -239,7 +239,7 @@ export const getVaccineRecordAPI = async () => {
     },
   };
   try {
-    const response = await axios.get(`${kBaseUrl}/records/`, config);
+    const response = await axios.get(`${kBaseUrl}/records?ids=${id}`, config);
 
     if (response.status === 200) {
       console.log("got all records");
@@ -260,7 +260,7 @@ export const getPatientVaccineDetailAPI = async (id) => {
     },
   };
   try {
-    const response = await axios.get(`${kBaseUrl}/vaccines/${id}`, config);
+    const response = await axios.get(`${kBaseUrl}/vaccines?ids=${id}`, config);
 
     if (response.status === 200) {
       console.log("got ONE vaccine INFO");
