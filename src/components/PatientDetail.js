@@ -25,7 +25,6 @@ const PatientDetail = (props) => {
           displayPatientDetail={props.displayPatientDetail}
         />
       </div>
-      <div className="col">Show if they need to get another vaccine here.</div>
     </div>
   );
 };

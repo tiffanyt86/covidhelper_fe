@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NationalVaccineForm from "../components/NewVaccineForm";
+import NewVaccineForm from "../components/NewVaccineForm";
 import { getAllVaccinesAPI, getVaccineDetailAPI } from "../components/APICalls";
 import VaccineList from "../components/VaccineList";
 import VaccineDetail from "../components/VaccineDetail";
@@ -29,8 +29,8 @@ const VaccinesMain = () => {
   };
 
   return (
-    <div className="container align-content-space-around">
-      <div className="row">
+    <div className="container ">
+      <div className="row justify-content-center">
         <div
           type="button"
           className="badge text-primary"
@@ -39,7 +39,7 @@ const VaccinesMain = () => {
           * Add New Vaccine
         </div>
 
-        <div className="col-6">
+        <div className="col-3">
           <h3>COVID-19 Vaccines</h3>
           <VaccineList
             vaccineData={vaccineData}
@@ -47,11 +47,13 @@ const VaccinesMain = () => {
             getAllVaccines={getAllVaccines}
           />
         </div>
-        <div className="col">
+        <div className="col align-self-flex-start px-0 no-gutters">
           {vaccineDetail && <VaccineDetail vaccineDetail={vaccineDetail} />}
         </div>
       </div>
-      {showForm && <NationalVaccineForm className="row" />}
+      {showForm && (
+        <NewVaccineForm className="row" getAllVaccines={getAllVaccines} />
+      )}
     </div>
   );
 };

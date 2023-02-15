@@ -42,7 +42,7 @@ const PatientRecord = (props) => {
       await setVaccineDetail(patientVaccineDetail);
     };
 
-    getPatientVaccineDetails(props.patientDetail.id); //nothing has been clicked yet so patientDetail is []
+    getPatientVaccineDetails(props.patientDetail.id);
   }, [props.patientDetail]);
 
   const getVaccinesArray = (records, vaccines) => {

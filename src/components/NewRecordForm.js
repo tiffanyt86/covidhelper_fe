@@ -27,7 +27,7 @@ const convertDate = (str) => {
 const NewRecordForm = (props) => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [message, setMessage] = useState(null);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [vaccineData, setVaccineData] = useState([]);
   const [patientData, setPatientData] = useState([]);
 
@@ -106,7 +106,6 @@ const NewRecordForm = (props) => {
     } else {
       setMessage("Error adding vaccine record");
     }
-    props.displayPatientDetail(patientData.id);
   };
 
   useEffect(() => {
@@ -159,7 +158,7 @@ const NewRecordForm = (props) => {
             <ReactDatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
-              placeholderText="DOB"
+              placeholderText="Date"
               showMonthDropdown
               showYearDropdown
               dropdownMode="select"

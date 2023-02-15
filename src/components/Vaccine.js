@@ -7,27 +7,25 @@ const Vaccine = (props) => {
     props.getAllVaccines();
   };
   return (
-    <div className="container justify-content-center">
-      <div className="row no-gutters align-items-center">
-        <div className="col">
+    <div className="container">
+      <div className="row align-items-center">
+        <div className="col-10">
           <button
             type="button"
-            className="list-group-item list-group-item-light list-group-item-action pr-0 py-2"
+            className="list-group-item btn-sm list-group-item-light list-group-item-action pr-0 py-2"
             onClick={() => props.displayVaccineDetail(props.id)}
           >
             {props.name}
           </button>
         </div>
-        <div className="col small">
-          <small>
-            <button
-              className="btn btn-secondary btn-sm"
-              onClick={handleDeleteVaccine}
-            >
-              x
-            </button>
-          </small>
-        </div>
+        <small>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={handleDeleteVaccine}
+          >
+            x
+          </button>
+        </small>
       </div>
     </div>
   );
