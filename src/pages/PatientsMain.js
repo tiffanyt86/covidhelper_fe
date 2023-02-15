@@ -6,8 +6,9 @@ import NewRecordForm from "../components/NewRecordForm";
 import { getAllPatientsAPI, getPatientDetailAPI } from "../components/APICalls";
 
 const PatientsMain = () => {
-  const [patientData, setPatientData] = useState([]);
-  const [patientDetail, setPatientDetail] = useState(null);
+  const [patientData, setPatientData] = useState([]); // gives list (array of objs) of all patients associated with current logged in user.
+  // id, first_name, last_name, dob, comorbidities, allergies
+  const [patientDetail, setPatientDetail] = useState(null); // stores details of currently selected patient.  Same attributes as above but for one single pt
   const [isSubmit, setIsSubmit] = useState(false);
 
   const getAllPatients = async () => {
@@ -34,15 +35,8 @@ const PatientsMain = () => {
             patientData={patientData}
             displayPatientDetail={displayPatientDetail}
             getAllPatients={getAllPatients}
+            patientDetail={patientDetail}
           />
-        </div>
-        <div className="col">
-          {patientDetail && (
-            <PatientDetail
-              patientDetail={patientDetail}
-              displayPatientDetail={displayPatientDetail}
-            />
-          )}
         </div>
       </div>
       <div className="row">

@@ -14,12 +14,15 @@ const PatientList = (props) => {
         allergies={patient.allergies}
         displayPatientDetail={props.displayPatientDetail}
         getAllPatients={props.getAllPatients}
+        patientDetail={props.patientDetail}
       />
     ));
   };
 
   return (
-    <div className="list-group">{getPatientsArray(props.patientData)}</div>
+    <div>
+      <div className="list-group">{getPatientsArray(props.patientData)}</div>
+    </div>
   );
 };
 

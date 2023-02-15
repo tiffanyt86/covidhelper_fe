@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { deletePatientAPI } from "./APICalls";
+import PatientDetail from "./PatientDetail";
 
 const Patient = (props) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClicked = () => {
+    props.displayPatientDetail(props.id);
+    setIsClicked(!isClicked);
+  };
+
   const handleDeletePatient = async () => {
     await deletePatientAPI(props.id);
     props.getAllPatients();
@@ -14,7 +22,7 @@ const Patient = (props) => {
           <button
             type="button"
             className="list-group-item list-group-item-action"
-            onClick={() => props.displayPatientDetail(props.id)}
+            onClick={handleClicked}
           >
             {props.last_name}, {props.first_name}
           </button>
@@ -28,6 +36,12 @@ const Patient = (props) => {
           </button>
         </div>
       </div>
+      {isClicked && (
+        <PatientDetail
+          patientDetail={props.patientDetail}
+          displayPatientDetail={props.displayPatientDetail}
+        />
+      )}
     </div>
   );
 };
