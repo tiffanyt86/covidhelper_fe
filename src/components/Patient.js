@@ -6,6 +6,7 @@ const Patient = (props) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClicked = () => {
+    console.log(props.id);
     props.displayPatientDetail(props.id);
     setIsClicked(!isClicked);
   };
@@ -21,10 +22,13 @@ const Patient = (props) => {
         <div className="col">
           <button
             type="button"
-            className="list-group-item list-group-item-action"
+            className="list-group-item list-group-item-secondary list-group-item-action mr-1 py-2"
             onClick={handleClicked}
           >
             {props.last_name}, {props.first_name}
+            <span className="badge badge-pill badge-light mx-3">
+              Up to date on all vaccines!
+            </span>
           </button>
         </div>
         <div className="col small">
@@ -36,12 +40,14 @@ const Patient = (props) => {
           </button>
         </div>
       </div>
-      {isClicked && (
-        <PatientDetail
-          patientDetail={props.patientDetail}
-          displayPatientDetail={props.displayPatientDetail}
-        />
-      )}
+      <div>
+        {isClicked && (
+          <PatientDetail
+            patientDetail={props.patientDetail}
+            displayPatientDetail={props.displayPatientDetail}
+          />
+        )}
+      </div>
     </div>
   );
 };

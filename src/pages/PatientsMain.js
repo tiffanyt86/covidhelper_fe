@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PatientList from "../components/PatientList";
-import PatientDetail from "../components/PatientDetail";
 import NewPatientForm from "../components/NewPatientForm";
 import NewRecordForm from "../components/NewRecordForm";
 import { getAllPatientsAPI, getPatientDetailAPI } from "../components/APICalls";

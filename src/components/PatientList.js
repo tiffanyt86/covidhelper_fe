@@ -21,7 +21,9 @@ const PatientList = (props) => {
 
   return (
     <div>
-      <div className="list-group">{getPatientsArray(props.patientData)}</div>
+      <div className="list-group list-group-flush">
+        {getPatientsArray(props.patientData)}
+      </div>
     </div>
   );
 };

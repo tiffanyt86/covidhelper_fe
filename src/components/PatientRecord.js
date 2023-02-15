@@ -6,6 +6,8 @@ const PatientRecord = (props) => {
   const [vaccineRecord, setVaccineRecord] = useState([]);
   const [vaccineDetail, setVaccineDetail] = useState([]);
 
+  console.log(props.patientDetail.id);
+
   useEffect(() => {
     const getVaccineDetail = async (id) => {
       const data = await getPatientVaccineDetailAPI(id);
@@ -42,21 +44,23 @@ const PatientRecord = (props) => {
       await setVaccineDetail(patientVaccineDetail);
     };
 
-    getPatientVaccineDetails(props.patientDetail.id);
+    getPatientVaccineDetails(props.patientDetail.id); //nothing has been clicked yet so patientDetail is []
   }, [props.patientDetail]);
 
   const getVaccinesArray = (records, vaccines) => {
     return records.map((record) => (
-      <div className="card">
-        <VaccinationLogEntry
-          key={record.id}
-          id={record.id}
-          date_administered={record.date_administered}
-          vaccine_id={record.vaccine_id}
-          patient_id={record.patient_id}
-          vaccine={vaccines[record.vaccine_id]}
-          displayPatientDetail={props.displayPatientDetail}
-        />
+      <div className="border w-50 h-25">
+        <small>
+          <VaccinationLogEntry
+            key={record.id}
+            id={record.id}
+            date_administered={record.date_administered}
+            vaccine_id={record.vaccine_id}
+            patient_id={record.patient_id}
+            vaccine={vaccines[record.vaccine_id]}
+            displayPatientDetail={props.displayPatientDetail}
+          />
+        </small>
       </div>
     ));
   };
