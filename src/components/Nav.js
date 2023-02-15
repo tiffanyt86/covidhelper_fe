@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { getItemFromLocalStorage, useAuth } from "../hooks/useAuth";
+
 import "./nav.css";
 
 const Nav = () => {
@@ -56,6 +57,7 @@ const Nav = () => {
           <NavLink className="nav-item nav-link" to="/home">
             Home <span className="sr-only">(current)</span>
           </NavLink>
+
           <NavLink className="nav-item nav-link" to="/vaccines">
             Vaccines
           </NavLink>

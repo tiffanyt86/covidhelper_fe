@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import NationalVaccineForm from "../components/NewVaccineForm";
-import {
-  getAllVaccinesAPI,
-  getVaccineDetailAPI,
-  deleteVaccineAPI,
-} from "../components/APICalls";
+import { getAllVaccinesAPI, getVaccineDetailAPI } from "../components/APICalls";
 import VaccineList from "../components/VaccineList";
 import VaccineDetail from "../components/VaccineDetail";
 
 const VaccinesMain = () => {
   const [vaccineData, setVaccineData] = useState([]);
   const [vaccineDetail, setVaccineDetail] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   const getAllVaccines = async () => {
     const data = await getAllVaccinesAPI();
     setVaccineData(data);
+  };
+
+  const handleShowForm = (event) => {
+    setShowForm(!showForm);
+    event.prevent.default();
   };
 
   useEffect(() => {
@@ -29,8 +31,16 @@ const VaccinesMain = () => {
   return (
     <div className="container align-content-space-around">
       <div className="row">
-        <div className="col">
-          <h3>Available COVID-19 Vaccines</h3>
+        <div
+          type="button"
+          className="badge text-primary"
+          onClick={handleShowForm}
+        >
+          * Add New Vaccine
+        </div>
+
+        <div className="col-6">
+          <h3>COVID-19 Vaccines</h3>
           <VaccineList
             vaccineData={vaccineData}
             displayVaccineDetail={displayVaccineDetail}
@@ -41,7 +51,7 @@ const VaccinesMain = () => {
           {vaccineDetail && <VaccineDetail vaccineDetail={vaccineDetail} />}
         </div>
       </div>
-      <NationalVaccineForm className="row" />
+      {showForm && <NationalVaccineForm className="row" />}
     </div>
   );
 };

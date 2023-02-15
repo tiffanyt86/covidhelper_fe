@@ -7,7 +7,7 @@ import { getAllPatientsAPI, getPatientDetailAPI } from "../components/APICalls";
 const PatientsMain = () => {
   const [patientData, setPatientData] = useState([]); // gives list (array of objs) of all patients associated with current logged in user.
   // id, first_name, last_name, dob, comorbidities, allergies
-  const [patientDetail, setPatientDetail] = useState(null); // stores details of currently selected patient.  Same attributes as above but for one single pt
+  const [patientDetail, setPatientDetail] = useState([]); // stores details of currently selected patient.  Same attributes as above but for one single pt
   const [isSubmit, setIsSubmit] = useState(false);
 
   const getAllPatients = async () => {

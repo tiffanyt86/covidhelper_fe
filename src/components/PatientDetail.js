@@ -6,8 +6,6 @@ function boolToWord(bool) {
 }
 
 const PatientDetail = (props) => {
-  console.log(props.patientDetail);
-
   return (
     <div className="row">
       <div className="col">

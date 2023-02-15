@@ -24,7 +24,9 @@ const VaccineList = (props) => {
   };
 
   return (
-    <div className="list-group">{getVaccinesArray(props.vaccineData)}</div>
+    <div className="list-group list-group-flush">
+      {getVaccinesArray(props.vaccineData)}
+    </div>
   );
 };
 

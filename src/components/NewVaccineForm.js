@@ -47,10 +47,10 @@ const NewVaccineForm = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container w-50">
       <h3>Vaccine Input Form</h3>
       <p></p>
-      <form onSubmit={handleAddVaccine}>
+      <form className="small" onSubmit={handleAddVaccine}>
         <div className="form-group row">
           <label className="col-sm-2 col-form-label">Vaccine Name</label>
           <div className="col-sm-10">

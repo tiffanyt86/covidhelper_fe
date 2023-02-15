@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { deletePatientAPI } from "./APICalls";
 import PatientDetail from "./PatientDetail";
 
 const Patient = (props) => {
   const [isClicked, setIsClicked] = useState(false);
 
+  useEffect(() => {
+    props.getAllPatients();
+  }, []);
+
   const handleClicked = () => {
-    console.log(props.id);
     props.displayPatientDetail(props.id);
     setIsClicked(!isClicked);
   };
 
-  const handleDeletePatient = async () => {
-    await deletePatientAPI(props.id);
+  const handleDeletePatient = () => {
+    deletePatientAPI(props.id);
     props.getAllPatients();
   };
 
