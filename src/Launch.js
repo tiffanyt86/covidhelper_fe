@@ -1,5 +1,6 @@
 import logo from "./images/1.png";
 import Welcome from "./components/Welcome";
+import Footer from "./components/Footer";
 
 function Launch() {
   return (
@@ -10,6 +11,9 @@ function Launch() {
         </div>
         <Welcome />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

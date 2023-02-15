@@ -61,120 +61,122 @@ const NewPatientForm = (props) => {
 
   return (
     <div className="col">
-      <h3>Add New Patient</h3>
-      <p></p>
-      <form onSubmit={handleAddPatient}>
-        <div className="form-group row">
-          <label className="col-sm-2 col-form-label">First Name</label>
-          <div className="col-sm-10">
-            <input
-              type="text"
-              className="form-control"
-              id="first_name"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-            ></input>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Last Name</label>
-          <div className="col-sm-10">
-            <input
-              type="text"
-              className="form-control"
-              id="last_name"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-            ></input>
-          </div>
-        </div>
-        <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Date of Birth</label>
-          <div className="col-sm-3">
-            <ReactDatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              placeholderText="DOB"
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              isClearable
-            />
-          </div>
-        </div>
-        <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Comorbidities</label>
-          <div className="col-sm-10">
-            <div className="form-check form-check-inline">
+      <small>
+        <h4 className="pt-2">Add New Patient</h4>
+        <p></p>
+        <form className="form-control-sm" onSubmit={handleAddPatient}>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">First Name</label>
+            <div className="col-sm-10">
               <input
-                className="form-check-input"
-                type="radio"
-                name="comorbidities"
-                id="comorbidities"
-                value="True"
-                checked={formData.comorbidities === "True"}
+                type="text"
+                className="form-control"
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
                 onChange={handleChange}
               ></input>
-              <label className="form-check-label">True</label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="comorbidities"
-                id="comorbidities"
-                value="False"
-                checked={formData.comorbidities === "False"}
-                onChange={handleChange}
-              ></input>
-              <label className="form-check-label">False</label>
             </div>
           </div>
-        </div>
-        <div className="form-group row">
-          <label className="col-sm-2 col-form-label">Allergies</label>
-          <div className="col-sm-10">
-            <div className="form-check form-check-inline">
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Last Name</label>
+            <div className="col-sm-10">
               <input
-                className="form-check-input"
-                type="radio"
-                name="allergies"
-                id="allergies"
-                value="True"
-                checked={formData.allergies === "True"}
+                type="text"
+                className="form-control"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
                 onChange={handleChange}
               ></input>
-              <label className="form-check-label">True</label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="allergies"
-                id="allergies"
-                value="False"
-                checked={formData.allergies === "False"}
-                onChange={handleChange}
-              ></input>
-              <label className="form-check-label">False</label>
             </div>
           </div>
-        </div>
-        <div className="form-group row">
-          <div className="col-sm-10 theme-color">
-            <span>
-              <input
-                type="submit"
-                className="btn btn-primary"
-                value="Add New Patient"
-              ></input>
-            </span>
-            {message && <span className="pl-3">{message}</span>}
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Date of Birth</label>
+            <div className="col-sm-3 pr-0">
+              <ReactDatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                placeholderText="DOB"
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                isClearable
+              />
+            </div>
           </div>
-        </div>
-      </form>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Comorbidities</label>
+            <div className="col-sm-10 pl-5 pt-1">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="comorbidities"
+                  id="comorbidities"
+                  value="True"
+                  checked={formData.comorbidities === "True"}
+                  onChange={handleChange}
+                ></input>
+                <label className="form-check-label">True</label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="comorbidities"
+                  id="comorbidities"
+                  value="False"
+                  checked={formData.comorbidities === "False"}
+                  onChange={handleChange}
+                ></input>
+                <label className="form-check-label">False</label>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Allergies</label>
+            <div className="col-sm-10 pl-5 pt-2">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="allergies"
+                  id="allergies"
+                  value="True"
+                  checked={formData.allergies === "True"}
+                  onChange={handleChange}
+                ></input>
+                <label className="form-check-label">True</label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="allergies"
+                  id="allergies"
+                  value="False"
+                  checked={formData.allergies === "False"}
+                  onChange={handleChange}
+                ></input>
+                <label className="form-check-label">False</label>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row">
+            <div className="col-sm-10 theme-color">
+              <span>
+                <input
+                  type="submit"
+                  className="btn btn-primary"
+                  value="Add New Patient"
+                ></input>
+              </span>
+              {message && <span className="pl-3">{message}</span>}
+            </div>
+          </div>
+        </form>
+      </small>
     </div>
   );
 };

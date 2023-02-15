@@ -116,20 +116,19 @@ const NewRecordForm = (props) => {
 
   return (
     <div className="col">
-      <h3>Add New Vaccine Record</h3>
+      <h4 className="pt-2">Add New Vaccine Record</h4>
       <p></p>
-      {/* <form onChange={handleChange} onSubmit={handleAddRecord}> */}
-      <form onSubmit={handleAddRecord}>
+      <form className="form-control-sm" onSubmit={handleAddRecord}>
         <div className="form-group row">
           <label
-            className="col-sm-2 col-form-label"
+            className="col-sm-5 col-form-label"
             for="inlineFormCustomSelect"
           >
             Vaccine Name
           </label>
           <select
             value={vaccineData.vaccine_id}
-            class="col-sm-3"
+            class="col-sm-4"
             name="vaccine_id"
             id="vaccine_id"
             onChange={handleVaccineChange}
@@ -139,11 +138,11 @@ const NewRecordForm = (props) => {
           </select>
         </div>
         <div className="form-group row">
-          <label class="col-sm-2 col-form-label" for="inlineFormCustomSelect">
+          <label class="col-sm-5 col-form-label" for="inlineFormCustomSelect">
             Patient Name
           </label>
           <select
-            class="col-sm-3"
+            class="col-sm-4"
             name="patient_id"
             id="patient_id"
             onChange={handlePatientChange}
@@ -153,10 +152,10 @@ const NewRecordForm = (props) => {
           </select>
         </div>
         <div className="form-group row">
-          <label className="col-sm-2 col-form-label">
+          <label className="col-sm-5 col-form-label">
             Vaccine Administered On
           </label>
-          <div className="col-sm-3">
+          <div className="col-sm-4">
             <ReactDatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}

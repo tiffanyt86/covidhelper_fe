@@ -49,10 +49,6 @@ export const routes = [
         element: <Logout />,
         path: "/logout",
       },
-      // {
-      //   element: <Navigate to="/404" replace />,
-      //   path: "*",
-      // },
     ],
   },
   // unprotect views
