@@ -6,10 +6,6 @@ const PatientRecord = (props) => {
   const [vaccineRecord, setVaccineRecord] = useState([]);
   const [vaccineDetail, setVaccineDetail] = useState([]);
 
-  if (vaccineRecord === []) {
-    props.handleBadge();
-  }
-
   useEffect(() => {
     const getVaccineDetail = async (id) => {
       const data = await getPatientVaccineDetailAPI(id);

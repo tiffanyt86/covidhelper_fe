@@ -27,7 +27,7 @@ const convertDate = (str) => {
 const NewRecordForm = (props) => {
   const [formData, setFormData] = useState(kDefaultFormState);
   const [message, setMessage] = useState(null);
-  const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
   const [vaccineData, setVaccineData] = useState([]);
   const [patientData, setPatientData] = useState([]);
 
@@ -100,6 +100,7 @@ const NewRecordForm = (props) => {
   const handleAddRecord = async (event) => {
     event.preventDefault();
     const response = await addNewRecordAPI(formData);
+    setStartDate(new Date());
 
     if (response.status === 201) {
       setMessage("Added new vaccine record!");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { deletePatientAPI } from "./APICalls";
+import { deletePatientAPI, getVaccineRecordAPI } from "./APICalls";
 import PatientDetail from "./PatientDetail";
 
 const rndInt = () => Math.floor(Math.random() * 4);
@@ -20,10 +20,20 @@ const status_selector = ["secondary", "success", "warning", "danger"];
 const Patient = (props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [status, setStatus] = useState([]);
-  const [displayBadge, setDisplayBadge] = useState(false);
+  const [displayBadge, setDisplayBadge] = useState(true);
 
   useEffect(() => {
+    const getVaccRecord = async (id) => {
+      const record = await getVaccineRecordAPI(id);
+      console.log(record);
+
+      if (record === []) {
+        setDisplayBadge(false);
+      }
+    };
+
     props.getAllPatients();
+    getVaccRecord(props.id);
     determine_status();
   }, []);
 
@@ -39,10 +49,6 @@ const Patient = (props) => {
     await setStatus(pt_status);
   };
 
-  const handleBadge = () => {
-    setDisplayBadge(!displayBadge);
-  };
-
   const handleClicked = () => {
     props.displayPatientDetail(props.id);
     setIsClicked(!isClicked);
@@ -53,7 +59,8 @@ const Patient = (props) => {
     props.getAllPatients();
   };
 
-  console.log(oddOrEven(props.id));
+  console.log(displayBadge);
+
   return (
     <div className="container justify-content-center">
       <div className="row no-gutters align-items-center">
@@ -69,13 +76,11 @@ const Patient = (props) => {
                 {status[1]}
               </span>
             )}
-            {status[0] !== "success" ||
-              displayBadge ===
-                false(
-                  <span className="badge badge-light mx-3">
-                    {oddOrEven(props.id)}
-                  </span>
-                )}
+            {status[0] !== "success" && (
+              <span className="badge badge-light mx-3">
+                {oddOrEven(props.id)}
+              </span>
+            )}
           </button>
         </div>
         <div className="col small">
@@ -92,7 +97,7 @@ const Patient = (props) => {
           <PatientDetail
             patientDetail={props.patientDetail}
             displayPatientDetail={props.displayPatientDetail}
-            handleBadge={handleBadge}
+            setDisplayBadge={setDisplayBadge}
           />
         )}
       </div>
