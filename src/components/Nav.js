@@ -61,9 +61,7 @@ const Nav = () => {
           <NavLink className="nav-item nav-link" to="/vaccines">
             Vaccines
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/about">
-            About
-          </NavLink>
+
           <NavLink className="nav-item nav-link" to="/patients">
             Patients
           </NavLink>
