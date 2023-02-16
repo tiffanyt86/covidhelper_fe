@@ -20,6 +20,12 @@ const status_selector = ["secondary", "success", "warning", "danger"];
 const Patient = (props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [status, setStatus] = useState([]);
+  const [displayBadge, setDisplayBadge] = useState(false);
+
+  useEffect(() => {
+    props.getAllPatients();
+    determine_status();
+  }, []);
 
   const get_status = () => {
     const index = rndInt();
@@ -33,10 +39,9 @@ const Patient = (props) => {
     await setStatus(pt_status);
   };
 
-  useEffect(() => {
-    props.getAllPatients();
-    determine_status();
-  }, []);
+  const handleBadge = () => {
+    setDisplayBadge(!displayBadge);
+  };
 
   const handleClicked = () => {
     props.displayPatientDetail(props.id);
@@ -59,14 +64,18 @@ const Patient = (props) => {
             onClick={handleClicked}
           >
             {props.last_name}, {props.first_name}
-            <span className={`badge badge-pill badge-${status[0]} mx-3`}>
-              {status[1]}
-            </span>
-            {status[0] !== "success" && (
-              <span className="badge badge-light mx-3">
-                {oddOrEven(props.id)}
+            {displayBadge && (
+              <span className={`badge badge-pill badge-${status[0]} mx-3`}>
+                {status[1]}
               </span>
             )}
+            {status[0] !== "success" ||
+              displayBadge ===
+                false(
+                  <span className="badge badge-light mx-3">
+                    {oddOrEven(props.id)}
+                  </span>
+                )}
           </button>
         </div>
         <div className="col small">
@@ -83,6 +92,7 @@ const Patient = (props) => {
           <PatientDetail
             patientDetail={props.patientDetail}
             displayPatientDetail={props.displayPatientDetail}
+            handleBadge={handleBadge}
           />
         )}
       </div>
