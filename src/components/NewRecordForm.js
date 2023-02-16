@@ -75,32 +75,50 @@ const NewRecordForm = (props) => {
     ));
   };
 
-  const handlePatientChange = (event) => {
+  const handleChange = (event) => {
+    setMessage(null);
+    const fieldValue = event.target.value;
+    const fieldName = event.target.name;
     const newFormData = {
       ...formData,
-      patient_id: event.target.value,
-      date_administered: convertDate(startDate),
+      [fieldName]: fieldValue,
     };
-    setFormData(newFormData);
-    setMessage(null);
     console.log(newFormData);
+    setFormData(newFormData);
   };
 
-  const handleVaccineChange = (event) => {
-    const newFormData = {
-      ...formData,
-      vaccine_id: event.target.value,
-      date_administered: convertDate(startDate),
-    };
-    setFormData(newFormData);
-    setMessage(null);
-    console.log(newFormData);
-  };
+  // const handlePatientChange = (event) => {
+  //   const newFormData = {
+  //     ...formData,
+  //     patient_id: event.target.value,
+  //     date_administered: convertDate(startDate),
+  //   };
+  //   setFormData(newFormData);
+  //   setMessage(null);
+  //   console.log(newFormData);
+  // };
+
+  // const handleVaccineChange = (event) => {
+  //   const newFormData = {
+  //     ...formData,
+  //     vaccine_id: event.target.value,
+  //     date_administered: convertDate(startDate),
+  //   };
+  //   setFormData(newFormData);
+  //   setMessage(null);
+  //   console.log(newFormData);
+  // };
 
   const handleAddRecord = async (event) => {
     event.preventDefault();
-    const response = await addNewRecordAPI(formData);
-    setStartDate(new Date());
+
+    const convertedFormData = {
+      ...formData,
+      date_administered: convertDate(startDate),
+    };
+    console.log(convertedFormData);
+    const response = await addNewRecordAPI(convertedFormData);
+    setFormData(kDefaultFormState);
 
     if (response.status === 201) {
       setMessage("Added new vaccine record!");
@@ -131,7 +149,7 @@ const NewRecordForm = (props) => {
             class="col-sm-4"
             name="vaccine_id"
             id="vaccine_id"
-            onChange={handleVaccineChange}
+            onChange={handleChange}
           >
             <option>Select Vaccine...</option>
             {getVaccineArray(vaccineData)}
@@ -145,7 +163,7 @@ const NewRecordForm = (props) => {
             class="col-sm-4"
             name="patient_id"
             id="patient_id"
-            onChange={handlePatientChange}
+            onChange={handleChange}
           >
             <option>Select Patient...</option>
             {getPatientsArray(patientData)}
@@ -158,6 +176,7 @@ const NewRecordForm = (props) => {
           <div className="col-sm-4">
             <ReactDatePicker
               selected={startDate}
+              onSelect={(date) => setStartDate(date)}
               onChange={(date) => setStartDate(date)}
               placeholderText="Date"
               showMonthDropdown
