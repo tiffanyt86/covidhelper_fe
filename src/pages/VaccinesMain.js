@@ -39,7 +39,7 @@ const VaccinesMain = () => {
           * Add New Vaccine
         </div>
 
-        <div className="col-3">
+        <div className="col-4">
           <h3>COVID-19 Vaccines</h3>
           <VaccineList
             vaccineData={vaccineData}

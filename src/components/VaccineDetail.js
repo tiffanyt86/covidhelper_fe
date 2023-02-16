@@ -9,12 +9,12 @@ function boolToWord(bool) {
 const VaccineDetail = (props) => {
   return (
     <div className="row-2 pr-4 ml-5 mr-2 pl-3">
-      <h4 className="row pt-2 ml-5 theme-color">{props.vaccineDetail.name}</h4>
+      <h5 className="row pt-2 ml-5 theme-color">{props.vaccineDetail.name}</h5>
       <div className="row">
         <div className="col-4 ml-5 mr-0 ">
           <img
             className="img-fluid h-50"
-            src="https://i.imgur.com/gJbfaaT.png"
+            src={props.vaccineDetail.link}
             alt="#"
           />
         </div>
@@ -62,15 +62,10 @@ const VaccineDetail = (props) => {
                 <th scope="row">NDC</th>
                 <td>{props.vaccineDetail.ndc}</td>
               </tr>
-              <tr>
-                <th scope="row">FDA Link</th>
-                <td>{props.vaccineDetail["link"]}</td>
-              </tr>
             </tbody>
           </table>
         </small>
       </div>
-      {/* <img src="https://i.imgur.com/IaEbUfR.png" alt="" /> */}
     </div>
   );
 };

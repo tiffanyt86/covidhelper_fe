@@ -1,6 +1,8 @@
 import React from "react";
 import { deleteVaccineAPI } from "./APICalls";
 
+import "./vaccine.css";
+
 const Vaccine = (props) => {
   const handleDeleteVaccine = async () => {
     await deleteVaccineAPI(props.id);
@@ -12,7 +14,7 @@ const Vaccine = (props) => {
         <div className="col-10">
           <button
             type="button"
-            className="list-group-item btn-sm list-group-item-light list-group-item-action pr-0 py-2"
+            className="xsmall list-group-item btn-sm list-group-item-light list-group-item-action pr-0 py-2"
             onClick={() => props.displayVaccineDetail(props.id)}
           >
             {props.name}
